@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Interest Calculator</title>
+
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+ <link rel="stylesheet" href="style.css">
+ <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <select id="language" onchange="changeLanguage()">
+  <option value="en">English</option>
+  <option value="te">తెలుగు</option>
+  <option value="hi">हिन्दी</option>
+  <option value="ta">தமிழ்</option>
+  <option value="ml">മലയാളം</option>
+</select>
+
+
+    <h1 id="title">Simple Interest Calculator</h1>
+
+    <label for="amount" id="amtLabel">Amount Given</label>
+    <input type="text" id="amount" placeholder="e.g. 60000" oninput="formatAmount(this)" />
+
+    <label for="interest" id="intLabel">Interest per Month (%)</label>
+    <input type="number" id="interest" step="0.01" min="0" placeholder="e.g. 1.5" />
+
+    <label for="givenDate" id="givenLabel">Given Date</label>
+    <input type="text" id="givenDate" placeholder="Select Given Date" readonly />
+
+    <label for="returnDate" id="returnLabel">Return Date</label>
+    <input type="text" id="returnDate" placeholder="Select Return Date" readonly />
+
+    <button id="calcBtn" onclick="calculateInterest()">Calculate Interest</button>
+
+    <pre id="resultBox"></pre>
+
+    <div id="downloadButtons">
+      <button onclick="downloadImage()">Download Image</button>
+    </div>
+  </div>
+
+  <!-- External libs -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</body>
+</html>
