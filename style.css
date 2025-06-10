@@ -1,92 +1,156 @@
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f4f8;
-    margin: 0; padding: 0;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh;
-  }
-  .container {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
-    padding: 30px 40px;
-    max-width: 480px;
-    width: 100%;
-    position: relative;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 24px;
-    color: #1e1e1e;
-    font-weight: 700;
-  }
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #2a2a2a;
-  }
-  input, select {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 20px;
-    border: 1.8px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-  }
-  input:focus, select:focus {
-    border-color: #4a90e2;
-    outline: none;
-  }
-  button {
-    background: #4a90e2;
-    border: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background: #357ABD;
-  }
-  #resultBox {
-    margin-top: 30px;
-    background: #e8f0fe;
-    padding: 20px 25px;
-    border-radius: 10px;
-    font-size: 16px;
-    color: #222;
-    display: none;
-    white-space: pre-line;
-  }
-  #downloadButtons {
-    margin-top: 15px;
-    display: none;
-    gap: 15px;
-    justify-content: center;
-  }
-  #downloadButtons button {
-    width: auto;
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-  /* Language selector top right only */
-  #language {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 110px;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1.5px solid #ccc;
-    background: rgb(47, 198, 120);
-    color: white;
-    cursor: pointer;
-  }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin: 50px 0 25px;
+            color: #2d2d2d;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        h1 i {
+            color: #6e8efb;
+            font-size: 28px;
+            animation: pulse 2s infinite;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        label i {
+            color: #6e8efb;
+            font-size: 18px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus {
+            border-color: #6e8efb;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.1);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            flex: 1;
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        button i {
+            font-size: 18px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        #resetBtn {
+            background: linear-gradient(90deg, #ff6b6b, #e63946);
+        }
+        #resultBox {
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .result-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+        .result-value {
+            font-weight: 600;
+            color: #6e8efb;
+        }
+        #downloadButtons {
+            margin-top: 15px;
+            display: none;
+            gap: 10px;
+            justify-content: center;
+        }
+        #downloadButtons button {
+            width: auto;
+            padding: 10px 20px;
+             background: linear-gradient(90deg, #ff6b6b, #e63946);
+        }
+        #language {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+            padding: 8px;
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .interest-type {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .interest-type label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .preview {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
