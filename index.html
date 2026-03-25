@@ -1,57 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Advanced Interest Calculator</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-     <link rel="stylesheet" href="style.css">
- <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <select id="language" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="te">తెలుగు</option>
-            <option value="hi">हिन्दी</option>
-            <option value="ta">தமிழ்</option>
-            <option value="ml">മലയാളം</option>
-        </select>
-        <h1 id="title"><i class="fas fa-calculator"></i> Advanced Simple Interest Calculator</h1>
-        <div class="input-group">
-            <label for="amount" id="amtLabel"><i class="fas fa-rupee-sign"></i> Amount Given</label>
-            <input type="text" id="amount" placeholder="e.g. 60,000" oninput="formatAmount(this); updatePreview()" />
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1 id="title">💰 Interest Calculator</h1>
+                <p class="subtitle">📊 Calculate your interest amount</p>
+            </div>
+            <div class="controls">
+                <select id="language" onchange="changeLanguage()" class="language-select">
+                    <option value="en">ENGLISH</option>
+                    <option value="te">TELUGU</option>
+                </select>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="interest" id="intLabel"><i class="fas fa-percentage"></i> Interest per Month (%)</label>
-            <input type="number" id="interest" step="0.01" min="0" placeholder="e.g. 1.5" oninput="updatePreview()" />
-            <div class="preview" id="interestPreview"></div>
-        </div>
-        <div class="interest-type">
-            <label><input type="radio" name="interestType" value="simple" checked onchange="updatePreview()"> <i class="fas fa-line-chart"></i> Simple Interest</label>
-            <label><input type="radio" name="interestType" value="compound" onchange="updatePreview()"> <i class="fas fa-chart-line"></i> Compound Interest</label>
-        </div>
-        <div class="input-group">
-            <label for="givenDate" id="givenLabel"><i class="fas fa-calendar-alt"></i> Given Date</label>
-            <input type="text" id="givenDate" placeholder="Select Given Date" readonly oninput="updatePreview()" />
-        </div>
-        <div class="input-group">
-            <label for="returnDate" id="returnLabel"><i class="fas fa-calendar-check"></i> Return Date</label>
-            <input type="text" id="returnDate" placeholder="Select Return Date" readonly oninput="updatePreview()" />
-            <div class="preview" id="durationPreview"></div>
-        </div>
-        <div class="button-group">
-            <button id="calcBtn" onclick="calculateInterest()"><i class="fas fa-calculate"></i> Calculate Interest</button>
-            <button id="resetBtn" onclick="resetForm()"><i class="fas fa-undo"></i> Reset</button>
-        </div>
-        <div id="resultBox"></div>
-        <div id="downloadButtons">
-            <button onclick="downloadImage()"><i class="fas fa-image"></i> Download Image</button>
+
+        <!-- Form Section -->
+        <form class="form-section" onsubmit="event.preventDefault(); calculateInterest();">
+            <!-- Amount Input -->
+            <div class="input-group">
+                <label id="amtLabel" for="amount">Amount</label>
+                <div class="input-wrapper">
+                    <span class="currency">₹</span>
+                    <input 
+                        type="text" 
+                        id="amount" 
+                        placeholder="0"
+                        oninput="formatAmount(this); updatePreview()"
+                    >
+                </div>
+            </div>
+
+            <!-- Interest Rate Input -->
+            <div class="input-group">
+                <label id="intLabel" for="interest">Interest per Month (%)</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="number" 
+                        id="interest" 
+                        placeholder="0.00"
+                        step="0.01"
+                        oninput="updatePreview()"
+                    >
+                    <span class="unit">%</span>
+                </div>
+                <div id="interestPreview" class="preview"></div>
+            </div>
+
+            <!-- Date Range -->
+            <div class="date-group">
+                <div class="input-group">
+                    <label id="givenLabel" for="givenDate">Given Date</label>
+                    <input 
+                        type="text" 
+                        id="givenDate" 
+                        placeholder="Select date"
+                        readonly
+                    >
+                </div>
+                <div class="input-group">
+                    <label id="returnLabel" for="returnDate">Return Date</label>
+                    <input 
+                        type="text" 
+                        id="returnDate" 
+                        placeholder="Select date"
+                        readonly
+                    >
+                </div>
+            </div>
+
+            <!-- Duration Preview -->
+            <div id="durationPreview" class="duration-info"></div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" id="calcBtn" class="btn-primary">Calculate</button>
+                <button type="button" id="resetBtn" class="btn-secondary" onclick="resetForm()">Reset</button>
+            </div>
+        </form>
+
+        <!-- Result Section (Hidden by default) -->
+        <div id="resultBox" class="result-section">
+            <div id="resultContent"></div>
+            <button type="button" class="btn-download" onclick="downloadAsImage()">📸 Download as Image</button>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
